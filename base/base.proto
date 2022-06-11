@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package base;
+option go_package = "github.com/bluemonkeywu/protocol/base";
+
+option optimize_for = SPEED;
+
+message Packet {  
+  uint32 pid = 1;	// Protocol ID   
+  uint64 uid = 2;	// User ID 
+  bytes data = 3;	// Real Serialized Data
+}
+  
+service Stream {
+    rpc Conversations(stream Packet) returns (stream Packet) {};
+}
